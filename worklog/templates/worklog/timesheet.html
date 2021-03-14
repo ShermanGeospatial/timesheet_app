@@ -1,0 +1,33 @@
+{% if user.is_authenticated %}
+
+Employee: {{ user.get_username }}
+
+<div>
+
+        <a href="{% url 'entry_create'%}" class="btn">New Entry</a>
+</div>
+ 
+{% if timesheet_view %}
+            
+{% for entry in timesheet_view %}
+
+    <div style='border-top:solid'>
+        <p><b>Job #:</b> {{entry.job_number}}</p>
+        <p><b>Client:</b> {{entry.client_name}}</p>
+        <p><b>Date:</b> {{entry.date}}</p>
+        <p><b>Hours:</b> {{entry.hours}}</p>
+
+        <div>
+            <a href="{% url 'entry_update' entry.id %}" class="btn">Open</a>
+        </div>
+    </div>
+{% endfor %}
+
+{% else %}
+    No Entries
+{% endif %}
+
+<a href="{% url 'logout'%}">Click here to logout.</a>
+{% else %}
+<a href="{% url 'login'%}?next={{request.path}}">Login</a>
+{% endif %} 

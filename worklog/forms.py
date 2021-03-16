@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, HiddenInput
 from .models import Entry
 
 class EntryForm(ModelForm):
@@ -15,4 +15,9 @@ class EntryForm(ModelForm):
             'work_type', 
             'work_description',
         ]
-        #widgets = {}
+        widgets = {
+
+            'employee_name':HiddenInput(),
+
+        }
+    
